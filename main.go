@@ -15,7 +15,8 @@ func main() {
 	//getUserById(1)
 	//updateUserById(1, "bilyrevisi@gmail.com")
 	//createProduct(1, "Wingsfood", "Mama Lemon")
-	getUserWithProducts()
+	//getUserWithProducts()
+	deleteProductById(1)
 }
 
 func createUser(email string) {
@@ -97,4 +98,18 @@ func getUserWithProducts() {
 
 	fmt.Println("User Datas with Products")
 	fmt.Printf("%+v", users)
+}
+
+func deleteProductById(id uint) {
+	db := database.GetDB()
+
+	product := models.Product{}
+	err := db.Where("id = ?", id).Delete(&product).Error
+
+	if err != nil {
+		fmt.Println("Error deleting product:", err.Error())
+		return
+	}
+
+	fmt.Printf("Product with id %d has been sucessfully deleted", id)
 }
