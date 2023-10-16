@@ -29,3 +29,7 @@ func StartDB() {
 
 	db.Debug().AutoMigrate(models.User{}, models.Product{})
 }
+
+func GetDB() *gorm.DB {
+	return db
+}
